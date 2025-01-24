@@ -1,5 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
+from Account.models import LibraryUsers
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class Author(models.Model):
@@ -58,18 +60,33 @@ class Book(models.Model):
         return self.price - (self.price * self.offers / 100)
 
 
+class Comment(models.Model):
+    user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name="comments")
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="comments", blank=True, null=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, related_name="replies", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.user}"
 
 
+class Rating(models.Model):
+    RATE_CHOICE = (
+        (1, '1', 'very weak'),
+        (2, '2', 'weak'),
+        (3, '3', 'average'),
+        (4, '4', 'good'),
+        (5, '5', 'great'),
+    )
 
+    user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name="rating")
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="rating", blank=True, null=True)
+    rate = models.PositiveIntegerField(
+        choices=RATE_CHOICE, validators=[MinValueValidator(1), MaxValueValidator(5)],blank=True, null=True)
 
-
-
-
-
-
-
-
-
+    def __str__(self):
+        return f"{self.user} - {self.book} - {self.rate}"
 
 
 

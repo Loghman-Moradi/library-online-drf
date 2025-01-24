@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.text import slugify
 from Account.models import LibraryUsers
-from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
 
 
 class Author(models.Model):
@@ -36,7 +36,6 @@ class Genre(models.Model):
             self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
-
     def __str__(self):
         return f"{self.name}"
 
@@ -50,7 +49,18 @@ class Book(models.Model):
     offers = models.PositiveIntegerField(default=0)
     publication_date = models.DateField(auto_now_add=True)
     cover_image = models.ImageField(upload_to="book_cover")
-    file = models.FileField(upload_to='book_file')
+    pdf_file = models.FileField(
+        upload_to='book_pdf/',
+        validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
+        null=True,
+        blank=True
+    )
+    audio_file = models.FileField(
+        upload_to="books_audio/",
+        validators=[FileExtensionValidator(allowed_extensions=['mp3', 'wav'])],
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return f"{self.title}"
@@ -87,8 +97,5 @@ class Rating(models.Model):
 
     def __str__(self):
         return f"{self.user} - {self.book} - {self.rate}"
-
-
-
 
 

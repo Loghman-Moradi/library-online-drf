@@ -17,18 +17,16 @@ class Author(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta:
+        ordering = ['id']
+        indexes = [
+            models.Index(fields=['id']),
+        ]
+
+
 
 class Genre(models.Model):
-    class Genres(models.TextChoices):
-        Fiction = "Fiction"
-        Romance = "Romance"
-        Adventure = "Adventure"
-        History = "History"
-        Self_Help = "Self-Help"
-        Business = "Business"
-        Biography = "Biography"
-
-    name = models.CharField(max_length=50, choices=Genres.choices, default=Genres.Fiction)
+    name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
 
     def save(self, *args, **kwargs):
@@ -39,18 +37,24 @@ class Genre(models.Model):
     def __str__(self):
         return f"{self.name}"
 
+    class Meta:
+        ordering = ['id']
+        indexes = [
+            models.Index(fields=['id']),
+        ]
+
 
 class Book(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    authors = models.ManyToManyField(Author, related_name="books")
+    authors = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name="books")
     price = models.PositiveIntegerField(default=0)
     offers = models.PositiveIntegerField(default=0)
     publication_date = models.DateField(auto_now_add=True)
     cover_image = models.ImageField(upload_to="book_cover")
     pdf_file = models.FileField(
-        upload_to='book_pdf/',
+        upload_to='books_pdf/',
         validators=[FileExtensionValidator(allowed_extensions=['pdf'])],
         null=True,
         blank=True
@@ -67,7 +71,13 @@ class Book(models.Model):
 
     @property
     def new_price(self):
-        return self.price - (self.price * self.offers / 100)
+        return self.price - self.offers
+
+    class Meta:
+        ordering = ['-publication_date']
+        indexes = [
+            models.Index(fields=['-publication_date']),
+        ]
 
 
 class Comment(models.Model):
@@ -80,14 +90,20 @@ class Comment(models.Model):
     def __str__(self):
         return f"{self.user}"
 
+    class Meta:
+        ordering = ['-created_at']
+        indexes = [
+            models.Index(fields=['-created_at']),
+        ]
+
 
 class Rating(models.Model):
     RATE_CHOICE = (
-        (1, '1', 'very weak'),
-        (2, '2', 'weak'),
-        (3, '3', 'average'),
-        (4, '4', 'good'),
-        (5, '5', 'great'),
+        (1, 'very weak'),
+        (2, 'weak'),
+        (3, 'average'),
+        (4, 'good'),
+        (5, 'great'),
     )
 
     user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name="rating")

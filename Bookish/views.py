@@ -7,8 +7,8 @@ from django.http import FileResponse
 from rest_framework import status
 from rest_framework.viewsets import ViewSet
 
-from .models import Book, Author
-from .serializers import BookSerializer, AuthorSerializer
+from .models import Book, Author, Comment
+from .serializers import BookSerializer, AuthorSerializer, CommentSerializer
 
 
 class BookApiView(viewsets.ModelViewSet):
@@ -45,6 +45,9 @@ class AuthorsApiView(viewsets.ModelViewSet):
     serializer_class = AuthorSerializer
 
 
+class CommentApiView(viewsets.ModelViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
 
 
 

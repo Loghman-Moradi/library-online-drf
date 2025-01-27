@@ -9,7 +9,6 @@ class GenreSerializer(serializers.ModelSerializer):
 
 
 class BookSerializer(serializers.ModelSerializer):
-    # genre = serializers.PrimaryKeyRelatedField(queryset=Genre.objects.all())
     new_price = serializers.SerializerMethodField()
 
     class Meta:
@@ -25,3 +24,28 @@ class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
         fields = ['id', 'name', 'bio']
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id', 'user', 'book', 'message']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

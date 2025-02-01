@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from django.http import FileResponse
 from rest_framework import status
 from rest_framework.viewsets import ViewSet
+from rest_framework.permissions import IsAuthenticated
 
 from .models import Book, Author, Comment
 from .serializers import BookSerializer, AuthorSerializer, CommentSerializer

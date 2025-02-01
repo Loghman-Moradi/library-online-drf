@@ -32,7 +32,7 @@ class LibraryUsers(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     date_joined = models.DateTimeField(default=timezone.now)
-    object = LibraryUsersManager()
+    objects = LibraryUsersManager()
     USERNAME_FIELD = 'phone'
     REQUIRED_FIELDS = []
 

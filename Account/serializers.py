@@ -2,7 +2,5 @@ from rest_framework import serializers
 from .models import LibraryUsers
 
 
-class LibraryUserSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = LibraryUsers
-        fields = ['phone']
+class LibraryUserSerializer(serializers.Serializer):
+    phone = serializers.CharField(max_length=11)

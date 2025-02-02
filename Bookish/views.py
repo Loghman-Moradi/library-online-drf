@@ -1,7 +1,7 @@
 import os.path
 
 from rest_framework import viewsets
-from rest_framework.decorators import action
+from rest_framework.decorators import action, permission_classes
 from rest_framework.response import Response
 from django.http import FileResponse
 from rest_framework import status
@@ -13,6 +13,7 @@ from .serializers import BookSerializer, AuthorSerializer, CommentSerializer
 
 
 class BookApiView(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
@@ -42,6 +43,7 @@ class BookApiView(viewsets.ModelViewSet):
 
 
 class AuthorsApiView(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 

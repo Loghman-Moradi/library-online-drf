@@ -2,6 +2,8 @@ import random
 from django.contrib.messages import success
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework_simplejwt.exceptions import TokenError
+
 from .serializers import LibraryUserSerializer
 from rest_framework import generics
 from .models import LibraryUsers
@@ -82,19 +84,24 @@ class VerifyOtpView(generics.GenericAPIView):
             return Response({'error': 'Invalid OTP'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+class RefreshTokenView(APIView):
+    def post(self, request):
+        user = request.user
+        if user is None:
+            return Response({"error": "The user is not authenticated."}, status=401)
 
+        refresh_token = request.data.get('refresh_token')
+        if not refresh_token:
+            return Response({"error": "Refresh token is required."}, status=400)
 
+        try:
+            refresh = RefreshToken(refresh_token)
+            access_token = str(refresh.access_token)
+            return Response({"access_token": access_token}, status=status.HTTP_200_OK)
 
+        except TokenError:
+            return Response({"error": "Refresh token has expired. Please log in again using OTP."}, status=status.HTTP_401_UNAUTHORIZED)
 
-
-
-
-# {
-#     "message": "User Created Successfully",
-#     "user": "09184517699",
-#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDA3NTg5LCJpYXQiOjE3Mzg0MDcyODksImp0aSI6ImI0NTVmYTAxMGYzYTQwYzk5YjMxMWU2OGVkMzFmYTk1IiwidXNlcl9pZCI6NX0.TYebGOHF5KzvtPsukbB4GbtLtJAyG14CacFXeJIHico",
-#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczODQ5MzY4OSwiaWF0IjoxNzM4NDA3Mjg5LCJqdGkiOiI5ZDgzYjZjZGMzZjc0YWY5OWY5ZjYyNjc1ZGJlNWM1NyIsInVzZXJfaWQiOjV9.Rl2IF0Rtl4md2KZue1_zIqZggsMvc2Jg4gbDor7Amxg"
-# }
 
 
 

@@ -7,7 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 class LibraryUserAdmin(UserAdmin):
     ordering = ['phone']
     model = LibraryUsers
-    list_display = ['phone', 'first_name', 'last_name', 'is_active', 'is_staff']
+    list_display = ['id', 'phone', 'first_name', 'last_name', 'is_active', 'is_staff']
 
     fieldsets = (
         (None, {'fields': ('phone', 'password')}),

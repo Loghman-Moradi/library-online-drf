@@ -10,6 +10,7 @@ router = DefaultRouter()
 router.register(r'books', views.BookApiView)
 router.register(r'authors', views.AuthorsApiView)
 router.register(r'comment', views.CommentApiView)
+router.register(r'rating', views.RatingApiView)
 
 
 urlpatterns = [

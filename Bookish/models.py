@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from Account.models import LibraryUsers
 from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
+from django.db.models import Avg
 
 
 class Author(models.Model):
@@ -22,7 +23,6 @@ class Author(models.Model):
         indexes = [
             models.Index(fields=['id']),
         ]
-
 
 
 class Genre(models.Model):
@@ -65,13 +65,18 @@ class Book(models.Model):
         null=True,
         blank=True
     )
-
+    average_rating = models.FloatField(default=0.0)
     def __str__(self):
         return f"{self.title}"
 
     @property
     def new_price(self):
         return self.price - self.offers
+
+    def update_average_rating(self):
+        average = self.rating.aggregate(Avg('rate'))['rate__avg'] or 0.0
+        self.average_rating = average
+        self.save()
 
     class Meta:
         ordering = ['-publication_date']

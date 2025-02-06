@@ -18,12 +18,15 @@ class BookApiView(viewsets.ModelViewSet):
     queryset = Book.objects.all()
     serializer_class = BookSerializer
 
+    def get_file_url(self, file):
+        return self.request.build_absolute_uri(file.url) if file else None
+
     @action(detail=True, methods=['get'])
-    def download_audio(self, request, pk=None):
+    def get_audio_url(self, request, pk=None):
         try:
             book = self.get_object()
+            audio_url = self.get_file_url(book.audio_file)
             if book.audio_file:
-                audio_url = request.build_absolute_uri(book.audio_file.url)
                 return Response({"Audio_url": audio_url}, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Audio File Not Found"}, status=status.HTTP_404_NOT_FOUND)
@@ -31,11 +34,11 @@ class BookApiView(viewsets.ModelViewSet):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(detail=True, methods=['get'])
-    def download_pdf(self, request, pk=None):
+    def get_pdf_url(self, request, pk=None):
         try:
             book = self.get_object()
             if book.pdf_file:
-                pdf_url = request.build_absolute_uri(book.pdf_file.url)
+                pdf_url = self.get_file_url(book.pdf_file)
                 return Response({"Pdf_url": pdf_url}, status=status.HTTP_200_OK)
             else:
                 return Response({"error": "Pdf File Not Found"}, status=status.HTTP_404_NOT_FOUND)
@@ -44,7 +47,7 @@ class BookApiView(viewsets.ModelViewSet):
 
 
 class AuthorsApiView(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 

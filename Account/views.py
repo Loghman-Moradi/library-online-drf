@@ -106,18 +106,5 @@ class RefreshTokenView(APIView):
 
 
 
-# {
-#     "message": "User found",
-#     "user": "09214249950",
-
-#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczODU2Nzk5NSwiaWF0IjoxNzM4NDgxNTk1LCJqdGkiOiJiYzU2MTYxM2E4Nzc0MmJkYWJjYTg5NTE1NTE5MzEyZSIsInVzZXJfaWQiOjF9.dhmlnDq-N1tncCv8_d5FIAknLyqAWwRdRdvTNn5YiaE"
-# }
-
-
-
-# {
-#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzM4NDgzNzU4LCJpYXQiOjE3Mzg0ODE1OTUsImp0aSI6IjNkNmY4YTAxOGY0NzRjMzY5NGYxYjMxNTE0Y2RiODE2IiwidXNlcl9pZCI6MX0.m_f7Muf0jpjSXxaGrk0d4YjcIkWgZ7htt2FPPtlyFwg"
-# }
-
 
 

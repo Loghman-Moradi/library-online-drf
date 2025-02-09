@@ -3,7 +3,7 @@ from .models import *
 
 
 class CartSerializer(serializers.ModelSerializer):
-    user_phone = serializers.SerializerMethodField()  # تغییر نام به user_phone
+    user_phone = serializers.SerializerMethodField()  
     cart_items = serializers.SerializerMethodField()
 
     class Meta:

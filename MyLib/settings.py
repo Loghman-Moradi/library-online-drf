@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
+from calendar import month
 from datetime import timedelta
 from pathlib import Path
 
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Bookish.apps.BookishConfig',
     'Account.apps.AccountConfig',
+    'Cart.apps.CartConfig',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
@@ -137,8 +139,17 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ACCESS_TOKEN_LIFETIME': timedelta(weeks=3),
+    'REFRESH_TOKEN_LIFETIME': timedelta(weeks=4),
 }
 
 
+
+# {
+#     "message": "User found",
+#     "user": "09214249950",
+# {
+#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwODk5MDg4LCJpYXQiOjE3MzkwODQwOTgsImp0aSI6IjQ2N2Q0MGU1ZTg3MzQ5NjA4MTA3MGVmN2QxMTZiMGY5IiwidXNlcl9pZCI6MX0.gN6SEbAuOWp9XIr1PSlCShSk3Bpy_0iF9DQFl1uPx6g"
+# }
+#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczOTE3MDQ5OCwiaWF0IjoxNzM5MDg0MDk4LCJqdGkiOiJkZWM2YTFhNTgyZGM0ODU4YjRlMjM3Y2IwZjJjN2VhOSIsInVzZXJfaWQiOjF9.FVNbsCwr61sfpkkaaez-kO4u5gE7gpB64mq1OjVWjBc"
+# }

@@ -24,7 +24,25 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('Bookish.urls', namespace='api')),
     path('api_account/', include('Account.urls', namespace='account_api')),
+    path('api_cart/', include('Cart.urls', namespace='cart_api')),
 
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

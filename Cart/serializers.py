@@ -3,18 +3,21 @@ from .models import *
 
 
 class CartSerializer(serializers.ModelSerializer):
-    user = serializers.SerializerMethodField()
+    user_phone = serializers.SerializerMethodField()  # تغییر نام به user_phone
     cart_items = serializers.SerializerMethodField()
 
     class Meta:
         model = Cart
-        fields = "__all__"
+        fields = ['id', 'user', 'session_id', 'user_phone', 'cart_items', ]
 
-    def get_user(self, obj):
-        return obj.user.phone
+    def get_user_phone(self, obj):
+        if obj.user:
+            return obj.user.phone
+        return None
 
     def get_cart_items(self, obj):
-        return CartSerializer(instance=obj.cart_items.all(), many=True).data
+        items = obj.cart_items.all()
+        return CartItemSerializer(instance=items, many=True).data
 
 
 class CartItemSerializer(serializers.ModelSerializer):

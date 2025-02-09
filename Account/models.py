@@ -37,7 +37,7 @@ class LibraryUsers(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return self.phone
+        return f"{self.phone}"
 
 
 

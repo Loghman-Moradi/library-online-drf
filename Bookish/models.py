@@ -1,4 +1,5 @@
 from django.db import models
+from django.template.defaultfilters import default
 from django.utils.text import slugify
 from Account.models import LibraryUsers
 from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
@@ -51,6 +52,7 @@ class Book(models.Model):
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name="books")
     price = models.PositiveIntegerField(default=0)
     offers = models.PositiveIntegerField(default=0)
+    inventory = models.PositiveIntegerField(default=0)
     publication_date = models.DateField(auto_now_add=True)
     cover_image = models.ImageField(upload_to="book_cover")
     pdf_file = models.FileField(

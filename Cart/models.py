@@ -11,10 +11,10 @@ class Cart(models.Model):
     def __str__(self):
         return str(self.user) if self.user else self.session_id
 
-    def get_total_price(self):
+    def total_price(self):
         total = 0
         for item in self.cart_items.all():
-            total += item.total_price()
+            total += item.subtotal()
         return total
 
 
@@ -22,13 +22,17 @@ class CartItems(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_items")
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="cart_items")
     quantity = models.PositiveSmallIntegerField(default=1)
-    price = models.PositiveIntegerField()
+
+
+    class Meta:
+        unique_together = ('cart', 'book')
 
     def __str__(self):
         return f"{self.book.title} - {self.quantity}"
 
-    def total_price(self):
-        return self.price * self.quantity
+    def subtotal(self):
+        return self.book.new_price * self.quantity
+
 
 
 class Coupon(models.Model):

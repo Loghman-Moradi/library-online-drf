@@ -59,53 +59,13 @@ class AddCartView(APIView):
         except Book.DoesNotExist:
             return Response({'error': 'Book not found'}, status=status.HTTP_404_NOT_FOUND)
 
-        quantity = request.data.get('quantity', 1)
-        try:
-            quantity = int(quantity)
-            if quantity <= 0:
-                return Response({"error": "Quantity must be greater than zero."}, status=status.HTTP_400_BAD_REQUEST)
-            elif quantity > book.inventory:
-                return Response({"error": "The number is more than the stock."}, status=status.HTTP_400_BAD_REQUEST)
-        except ValueError:
-            return Response({"error": "invalid quantity."}, status=status.HTTP_400_BAD_REQUEST)
+        existing_item = CartItems.objects.filter(cart=cart, book=book).first()
 
-        cart_item, created = CartItems.objects.get_or_create(cart=cart, book=book, defaults={'price': book.new_price})
-
-        if not created:
-            cart_item.quantity += quantity
-            cart_item.price = book.new_price
-            cart_item.save()
-
-        return Response({'Messages': "Book added to cart successfully."}, status=status.HTTP_200_OK)
-
-
-class UpdateCartView(APIView):
-    def post(self, request, book_id):
-        cart, session_id = getCart(request)
-
-        try:
-            cart_item = CartItems.objects.get(cart=cart, book__id=book_id)
-        except CartItems.DoesNotExist:
-            return Response({"error": 'item not found in cart'}, status=status.HTTP_404_NOT_FOUND)
-
-        quantity = request.data.get('quantity', None)
-        if quantity is None:
-            return Response({'error': 'Quantity is required'}, status=status.HTTP_400_BAD_REQUEST)
-
-        try:
-            quantity = int(quantity)
-            if quantity <= 0:
-                return Response({"error": "Quantity must be greater than zero."}, status=status.HTTP_400_BAD_REQUEST)
-            elif quantity > cart_item.book.inventory:
-                 return Response({"error": "The number is more than the stock."}, status=status.HTTP_400_BAD_REQUEST)
-        except ValueError:
-            return Response({"error": "invalid quantity."}, status=status.HTTP_400_BAD_REQUEST)
-
-        cart_item.quantity = quantity
-        cart_item.price = cart_item.book.new_price
-        cart_item.save()
-
-        return Response({"message": "Cart updated successfully."}, status=status.HTTP_200_OK)
+        if existing_item:
+            return Response({'error': 'This book is already in your cart.'}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            CartItems.objects.create(cart=cart, book=book, quantity=1)
+            return Response({'Messages': "Book added to cart successfully."}, status=status.HTTP_201_CREATED)
 
 
 class DeleteCartView(APIView):

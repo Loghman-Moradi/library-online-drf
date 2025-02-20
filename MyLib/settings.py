@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'Bookish.apps.BookishConfig',
     'Account.apps.AccountConfig',
+    'Orders.apps.OrdersConfig',
     'Cart.apps.CartConfig',
     'rest_framework',
     'rest_framework_simplejwt',

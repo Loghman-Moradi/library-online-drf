@@ -34,11 +34,10 @@ class CartItems(models.Model):
         return self.book.new_price * self.quantity
 
 
-
 class Coupon(models.Model):
     code = models.CharField(max_length=16, unique=True)
     min_price = models.FloatField()
-    mac_price = models.FloatField()
+    max_price = models.FloatField()
     discount_percentage = models.FloatField()
     active = models.DateField()
     expire = models.DateField()

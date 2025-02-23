@@ -7,7 +7,7 @@ def send_sms_with_template(receptor, tokens: dict, template):
         sending sms that needs template
     """
     try:
-        api = KavenegarAPI('2B43447356785348764F4B386363657A5A67325838654336594B686C35304F2F4D507A33313363363877773D')
+        api = KavenegarAPI('API KEY')
 
         params = {
             'receptor': receptor,

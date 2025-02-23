@@ -2,6 +2,12 @@ from rest_framework import serializers
 from .models import *
 
 
+class CouponSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Coupon
+        fields = '__all__'
+
+
 class OrderSerializer(serializers.ModelSerializer):
     order_items = serializers.SerializerMethodField()
     subtotal = serializers.SerializerMethodField()

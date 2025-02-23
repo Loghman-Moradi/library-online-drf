@@ -27,6 +27,7 @@ urlpatterns = [
     path('api_cart/', include('Cart.urls', namespace='cart_api')),
     path('api_order/', include('Orders.urls', namespace='order_api')),
 
+
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

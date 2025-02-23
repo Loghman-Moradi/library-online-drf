@@ -3,12 +3,13 @@ from .models import *
 
 
 class CartSerializer(serializers.ModelSerializer):
-    user_phone = serializers.SerializerMethodField()  # تغییر نام به user_phone
+    user_phone = serializers.SerializerMethodField()
     cart_items = serializers.SerializerMethodField()
+    total_price = serializers.SerializerMethodField()
 
     class Meta:
         model = Cart
-        fields = ['id', 'user', 'session_id', 'user_phone', 'cart_items', ]
+        fields = ['id', 'user', 'session_id', 'user_phone', 'cart_items', 'total_price']
 
     def get_user_phone(self, obj):
         if obj.user:
@@ -19,13 +20,20 @@ class CartSerializer(serializers.ModelSerializer):
         items = obj.cart_items.all()
         return CartItemSerializer(instance=items, many=True).data
 
+    def get_total_price(self, obj):
+        return obj.total_price
+
 
 class CartItemSerializer(serializers.ModelSerializer):
     book = serializers.SerializerMethodField()
+    price = serializers.SerializerMethodField()
 
     class Meta:
         model = CartItems
-        fields = '__all__'
+        fields = ['id', 'book', 'quantity', 'price']
 
     def get_book(self, obj):
         return obj.book.title
+
+    def get_price(self, obj):
+        return obj.price

@@ -154,3 +154,13 @@ SIMPLE_JWT = {
 # }
 #     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczOTE3MDQ5OCwiaWF0IjoxNzM5MDg0MDk4LCJqdGkiOiJkZWM2YTFhNTgyZGM0ODU4YjRlMjM3Y2IwZjJjN2VhOSIsInVzZXJfaWQiOjF9.FVNbsCwr61sfpkkaaez-kO4u5gE7gpB64mq1OjVWjBc"
 # }
+
+
+#0905
+
+# {
+#     "message": "User Created Successfully",
+#     "user": "09051885137",
+#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyMTE0OTcwLCJpYXQiOjE3NDAzMDA1NzAsImp0aSI6IjRjMTIxNDk5OWMwZTQwZmE4Y2FiNTk2NmMwYmNjZjQ1IiwidXNlcl9pZCI6N30.AzVaGEjyNfnbzzXwkbpczLtxKWaCfEBdETvzvTbmTbk",
+#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MjcxOTc3MCwiaWF0IjoxNzQwMzAwNTcwLCJqdGkiOiJjOTg5ZDQ4OWQyZjI0Y2M1ODRlM2ZjZDYyZWNkOGQ4ZCIsInVzZXJfaWQiOjd9.7djQGeyJm4ztJAOgsx4EksDiLFY2abalsSTTrvxybvI"
+# }

@@ -1,16 +1,28 @@
 import random
 from django.contrib.messages import success
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveUpdateAPIView, ListAPIView
 from rest_framework_simplejwt.exceptions import TokenError
-from .serializers import LibraryUserSerializer
+from .serializers import LibraryUserSerializer, ProfileSerializer
 from rest_framework import generics
-from .models import LibraryUsers
+from .models import LibraryUsers, Profile
 from django.utils import timezone
 from datetime import timedelta
 from rest_framework.response import Response
 from rest_framework import status
 from .kavenegar.KaveSms import send_sms_with_template
 from rest_framework_simplejwt.tokens import RefreshToken
+
+
+class ProfileView(RetrieveUpdateAPIView):
+    serializer_class = ProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # ایجاد یا بازیابی پروفایل کاربر
+        profile, created = Profile.objects.get_or_create(user=self.request.user)
+        return profile
 
 
 class SendOtpView(generics.GenericAPIView):

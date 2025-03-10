@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import LibraryUsers
+from .models import LibraryUsers, Profile
 from django.contrib.auth.admin import UserAdmin
 
 
@@ -7,7 +7,7 @@ from django.contrib.auth.admin import UserAdmin
 class LibraryUserAdmin(UserAdmin):
     ordering = ['phone']
     model = LibraryUsers
-    list_display = ['id', 'phone', 'first_name', 'last_name', 'is_active', 'is_staff']
+    list_display = ['id', 'phone', 'is_active', 'is_staff']
 
     fieldsets = (
         (None, {'fields': ('phone', 'password')}),
@@ -22,3 +22,8 @@ class LibraryUserAdmin(UserAdmin):
     )
 
     readonly_fields = ('date_joined',)
+
+
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = ['user', 'bio']

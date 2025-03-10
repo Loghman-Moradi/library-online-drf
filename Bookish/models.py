@@ -88,6 +88,18 @@ class Book(models.Model):
         ]
 
 
+class BookPurchase(models.Model):
+    user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name='purchased_books')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    purchase_date = models.DateTimeField(auto_now_add=True)
+
+    def purchased_books(self):
+        return self.user.purchased_books.all()
+
+    def __str__(self):
+        return f"{self.user.phone} - {self.book.title}"
+
+
 class Comment(models.Model):
     user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name="comments")
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="comments", blank=True, null=True)

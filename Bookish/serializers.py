@@ -42,6 +42,14 @@ class BookListSerializer(serializers.ModelSerializer):
         fields = ['id', 'title', 'authors', 'new_price', 'average_rating']
 
 
+class BookPurchaseSerializer(serializers.ModelSerializer):
+    book = BookListSerializer(read_only=True)
+
+    class Meta:
+        model = BookPurchase
+        fields = ['book', 'purchase_date']
+
+
 class BookDetailSerializer(serializers.ModelSerializer):
     new_price = serializers.SerializerMethodField()
     comments = CommentSerializer(many=True, read_only=True)
@@ -95,12 +103,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 
-# {
-#     "message": "User found",
-#     "user": "09214249950",
-#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQzMjc3NTU1LCJpYXQiOjE3NDE0NjMxNTUsImp0aSI6ImFlMTM4YzgyZWU4ZjRmNTQ5ZmViNDMxMzc5NDBhOGIwIiwidXNlcl9pZCI6MX0.acrSjayab0qXlqoeE1nvzIuH0acN3VzQilL8H31yJSc",
-#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0Mzg4MjM1NSwiaWF0IjoxNzQxNDYzMTU1LCJqdGkiOiJkMDQzNTYxMjBjZDU0NWZjYjc0NjFkYTg1MGZlY2U1NSIsInVzZXJfaWQiOjF9.kDxSC9s6m045Nibs3nInqLbrKY4RKq1uLZNLMSd0IAg"
-# }
+
 
 
 

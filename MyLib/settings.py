@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'Account.apps.AccountConfig',
     'Orders.apps.OrdersConfig',
     'Cart.apps.CartConfig',
+    'Payment.apps.PaymentConfig',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
@@ -145,22 +146,7 @@ SIMPLE_JWT = {
 }
 
 
-
-# {
-#     "message": "User found",
-#     "user": "09214249950",
-# {
-#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQwODk5MDg4LCJpYXQiOjE3MzkwODQwOTgsImp0aSI6IjQ2N2Q0MGU1ZTg3MzQ5NjA4MTA3MGVmN2QxMTZiMGY5IiwidXNlcl9pZCI6MX0.gN6SEbAuOWp9XIr1PSlCShSk3Bpy_0iF9DQFl1uPx6g"
-# }
-#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTczOTE3MDQ5OCwiaWF0IjoxNzM5MDg0MDk4LCJqdGkiOiJkZWM2YTFhNTgyZGM0ODU4YjRlMjM3Y2IwZjJjN2VhOSIsInVzZXJfaWQiOjF9.FVNbsCwr61sfpkkaaez-kO4u5gE7gpB64mq1OjVWjBc"
-# }
+SANDBOX = True
+MERCHANT = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 
 
-#0905
-
-# {
-#     "message": "User Created Successfully",
-#     "user": "09051885137",
-#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyMTE0OTcwLCJpYXQiOjE3NDAzMDA1NzAsImp0aSI6IjRjMTIxNDk5OWMwZTQwZmE4Y2FiNTk2NmMwYmNjZjQ1IiwidXNlcl9pZCI6N30.AzVaGEjyNfnbzzXwkbpczLtxKWaCfEBdETvzvTbmTbk",
-#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0MjcxOTc3MCwiaWF0IjoxNzQwMzAwNTcwLCJqdGkiOiJjOTg5ZDQ4OWQyZjI0Y2M1ODRlM2ZjZDYyZWNkOGQ4ZCIsInVzZXJfaWQiOjd9.7djQGeyJm4ztJAOgsx4EksDiLFY2abalsSTTrvxybvI"
-# }

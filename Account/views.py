@@ -1,9 +1,7 @@
 import random
 from django.contrib.messages import success
-from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework_simplejwt.exceptions import TokenError
-
 from .serializers import LibraryUserSerializer
 from rest_framework import generics
 from .models import LibraryUsers
@@ -28,13 +26,14 @@ class SendOtpView(generics.GenericAPIView):
 
             code = ''.join(random.sample('0123456789', 6))
             tokens = {'token': code}
+            print(tokens)
             expires_at = timezone.now() + timedelta(minutes=2)
 
             request.session['verification_code'] = code
             request.session['phone'] = phone
             request.session['expires_at'] = expires_at.isoformat()
 
-            success = send_sms_with_template(phone, tokens, 'user-login')
+            # success = send_sms_with_template(phone, tokens, 'user-login')
             if success:
                 return Response({"message": "OTP sent successfully"}, status=status.HTTP_200_OK)
             else:
@@ -100,7 +99,8 @@ class RefreshTokenView(APIView):
             return Response({"access_token": access_token}, status=status.HTTP_200_OK)
 
         except TokenError:
-            return Response({"error": "Refresh token has expired. Please log in again using OTP."}, status=status.HTTP_401_UNAUTHORIZED)
+            return Response({"error": "Refresh token has expired. Please log in again using OTP."},
+                            status=status.HTTP_401_UNAUTHORIZED)
 
 
 

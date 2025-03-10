@@ -86,80 +86,11 @@ class DeleteWholeCart(APIView):
     def delete(self, request):
         cart, session_id = getCart(request)
         if cart:
-            print(cart)
-            print('session_id', session_id)
             cart.cart_items.all().delete()
             return Response(
                 {"response": "Cart Items deleted successfully!"}, status=status.HTTP_204_NO_CONTENT)
         else:
             return Response(
                 {"error": "Cart not found."}, status=status.HTTP_404_NOT_FOUND)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

@@ -68,6 +68,7 @@ class Book(models.Model):
         blank=True
     )
     average_rating = models.FloatField(default=0.0)
+
     def __str__(self):
         return f"{self.title}"
 

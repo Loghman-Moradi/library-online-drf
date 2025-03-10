@@ -64,10 +64,11 @@ class ApplyCouponView(APIView):
             return Response({'error': 'Coupon usage limit reached'}, status=status.HTTP_400_BAD_REQUEST)
 
         if not (coupon.min_price <= order.subtotal <= (coupon.max_price or float('inf'))):
-            return Response({'error': 'Order total does not meet coupon requirements'}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({'error': 'Order total does not meet coupon requirements'},
+                            status=status.HTTP_400_BAD_REQUEST)
 
         discount_amount = (order.subtotal / 100) * coupon.discount_percentage
-        order.subtotal -= discount_amount  # directly update subtotal
+        order.subtotal -= discount_amount
         order.coupon_used = True
         order.coupon = coupon
         order.save()
@@ -75,35 +76,6 @@ class ApplyCouponView(APIView):
         coupon.users_used.add(request.user)
         coupon.save()
 
-        return Response({'message': 'Coupon applied successfully', 'discount': discount_amount}, status=status.HTTP_200_OK)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        return Response({'message': 'Coupon applied successfully', 'discount': discount_amount},
+                        status=status.HTTP_200_OK)
 

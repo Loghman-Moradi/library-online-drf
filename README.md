@@ -9,7 +9,7 @@ This project is a RESTful API for an e-library, built using Django REST Framewor
 ## :chart: Table of Contents
 
 *   [Introduction](#introduction)
-*   [Features](##Features)
+*   [Features](#Features)
 *   [Endpoints](#endpoints)
 *   [Authentication](#authentication)
 *   [Authorization](#authorization)

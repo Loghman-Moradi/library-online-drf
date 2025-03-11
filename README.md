@@ -6,27 +6,11 @@
 
 This project is a RESTful API for an e-library, built using Django REST Framework. It provides endpoints for managing books, authors, user profiles, shopping carts, orders, and more.  Authentication is handled using JWT (JSON Web Tokens).
 
-## :chart: Table of Contents
-
-*   [Introduction](#introduction)
-*   [Features](#Features)
-*   [Endpoints](#endpoints)
-*   [Authentication](#authentication)
-*   [Authorization](#authorization)
-*   [Models](#models)
-*   [Getting Started](#getting-started)
-    *   [Prerequisites](#prerequisites)
-    *   [Installation](#installation)
-    *   [Configuration](#configuration)
-    *   [Running the API](#running-the-api)
-*   [Contributing](#contributing)
-*   [License](#license)
-
 ## Introduction
 
 The E-Library REST API provides a backend for managing and accessing a digital library. It is designed to be used with a front-end application, allowing users to browse books, manage their profiles, place orders, and more.  The API uses JWT for secure authentication.
 
-## Features
+## :star: Features
 
 *   **Book Management:**
     *   List all books
@@ -136,39 +120,6 @@ The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_fra
     pip install -r requirements.txt
     ```
 
-### :red_circle: Configuration
-
-1.  Create a `.env` file in the project root directory.
-
-2.  Set the following environment variables:
-
-    *   `SECRET_KEY`: Django secret key
-    *   `DATABASE_URL`: Database connection URL
-    *   Any other environment variables required by your project (e.g., for SMS services)
-
-3.  Update the `settings.py` file to read environment variables using a library like `python-dotenv`.
-
-4.  **JWT Configuration:**  Verify that `REST_FRAMEWORK` and `SIMPLE_JWT` settings are correctly configured in your `settings.py` as shown below.  These settings control JWT authentication.
-
-    ```python
-    REST_FRAMEWORK = {
-        'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework_simplejwt.authentication.JWTAuthentication',
-        ),
-    }
-
-    SIMPLE_JWT = {
-        'ACCESS_TOKEN_LIFETIME': timedelta(weeks=3),
-        'REFRESH_TOKEN_LIFETIME': timedelta(weeks=4),
-    }
-    ```
-
-5.  **Custom User Model:** Confirm that `AUTH_USER_MODEL` is correctly set in `settings.py`:
-
-    ```python
-    AUTH_USER_MODEL = 'Account.LibraryUsers'
-    ```
-
 ### :wrench: Running the API
 
 1.  Apply migrations:
@@ -193,4 +144,6 @@ The API will be accessible at `http://localhost:8000/`.
 
 ## :white_check_mark: License
 
-This project is licensed under the MIT License
+<a href="https://opensource.org/licenses/MIT" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+    MIT License
+</a>

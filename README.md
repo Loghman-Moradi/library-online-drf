@@ -1,8 +1,12 @@
-# E-Library REST API
+<div align="center">
+    <img src="https://media.giphy.com/media/0eDNZ7gTR8z7CnmwLT/giphy.gif?cid=ecf05e47rtpz60ecy4296mw1tnzdbzaczwx7ktmqtzyiqjw5&ep=v1_gifs_search&rid=giphy.gif&ct=g" alt="Cute Cat" width="400" height="300">
+</div>
+
+# :books: E-Library REST API
 
 This project is a RESTful API for an e-library, built using Django REST Framework. It provides endpoints for managing books, authors, user profiles, shopping carts, orders, and more.  Authentication is handled using JWT (JSON Web Tokens).
 
-## Table of Contents
+## :chart: Table of Contents
 
 *   [Introduction](#introduction)
 *   [Features](#features)
@@ -15,7 +19,6 @@ This project is a RESTful API for an e-library, built using Django REST Framewor
     *   [Installation](#installation)
     *   [Configuration](#configuration)
     *   [Running the API](#running-the-api)
-*   [Testing](#testing)
 *   [Contributing](#contributing)
 *   [License](#license)
 
@@ -23,7 +26,7 @@ This project is a RESTful API for an e-library, built using Django REST Framewor
 
 The E-Library REST API provides a backend for managing and accessing a digital library. It is designed to be used with a front-end application, allowing users to browse books, manage their profiles, place orders, and more.  The API uses JWT for secure authentication.
 
-## Features
+## :star: Features
 
 *   **Book Management:**
     *   List all books
@@ -54,7 +57,7 @@ The E-Library REST API provides a backend for managing and accessing a digital l
 *   **PDF & Audio Book Support:**
     *   Books can have associated PDF and audio files.
 
-## Endpoints
+## 💥 Endpoints
 
 | Method   | Endpoint                            | Description                                    | Permissions                               |
 | :------- | :---------------------------------- | :--------------------------------------------- | :---------------------------------------- |
@@ -63,8 +66,8 @@ The E-Library REST API provides a backend for managing and accessing a digital l
 | `POST`   | `/api_account/send-otp/`                   | Send OTP for phone number verification       | `AllowAny`                                |
 | `POST`   | `/api_account/verify-otp/`                  | Verify OTP to authenticate user and receive JWT| `AllowAny`                                |
 | `POST`   | `/api_account/token-refresh/`              | Refresh authentication token                 | `AllowAny` (using refresh token)         |
-| `GET`    | `/api/profile/`                    | Retrieve user profile information            | `IsAuthenticated`                         |
-| `PUT`    | `/api/profile/`                    | Update user profile information              | `IsAuthenticated`                         |
+| `GET`    | `/api_account/profile/`                    | Retrieve user profile information            | `IsAuthenticated`                         |
+| `PUT`    | `/api_account/profile/`                    | Update user profile information              | `IsAuthenticated`                         |
 | `GET`    | `/api_cart/cart_page/`                  | View cart items                               | `IsAuthenticated`                         |
 | `POST`   | `/api_cart/add_to_cart/<int:book_id>/`   | Add book to the cart                          | `IsAuthenticated`                         |
 | `DELETE` | `/api_cart/delete_cart/<int:pk>/`        | Delete a specific cart item                   | `IsAuthenticated`                         |
@@ -76,13 +79,13 @@ The E-Library REST API provides a backend for managing and accessing a digital l
 | `CRUD`   | `/api/comments/`                   | Create, Read, Update, Delete comments        | `IsAuthenticated`                         |
 | `CRUD`   | `/api/ratings/`                    | Create, Read, Update, Delete ratings         | `IsAuthenticated`                         |
 
-**Note:**
+:exclamation: **Note:**
 
 *   `CRUD` indicates that the endpoint supports Create, Read, Update, and Delete operations.
 *   `<int:pk>` in the URL denotes an integer primary key.
 *   `<int:book_id>` in the URL denotes an integer book ID.
 
-## Authentication
+## :bulb: Authentication
 
 The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_framework_simplejwt` package.  Here's how authentication works:
 
@@ -94,15 +97,15 @@ The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_fra
 3.  **JWT Usage:** The access token must be included in the `Authorization` header of subsequent requests that require authentication. The header should be in the format `Bearer <access_token>`.
 4.  **Token Refresh:** Access tokens have a limited lifespan.  When an access token expires, a new access token can be obtained by sending the refresh token to the `/api_account/token-refresh/` endpoint.
 
-## Authorization
+## :closed_lock_with_key: Authorization
 
 *   `AllowAny`: The endpoint is accessible to anyone, regardless of authentication status.
 *   `IsAuthenticated`: The endpoint is only accessible to authenticated users who have a valid JWT access token.
 
 
-## Getting Started
+## :rocket: Getting Started
 
-### Prerequisites
+### :red_circle: Prerequisites
 
 *   Python (3.8+)
 *   pip
@@ -111,13 +114,12 @@ The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_fra
 *   `djangorestframework-simplejwt`
 *   Any other dependencies listed in `requirements.txt` (if available)
 
-### Installation
+### :red_circle: Installation
 
 1.  Clone the repository:
 
     ```bash
-    git clone [repository_url]
-    cd [repository_directory]
+    git clone https://github.com/Loghman-Moradi/library-online-drf.git
     ```
 
 2.  Create a virtual environment (recommended):
@@ -134,7 +136,7 @@ The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_fra
     pip install -r requirements.txt
     ```
 
-### Configuration
+### :red_circle: Configuration
 
 1.  Create a `.env` file in the project root directory.
 
@@ -167,7 +169,7 @@ The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_fra
     AUTH_USER_MODEL = 'Account.LibraryUsers'
     ```
 
-### Running the API
+### :wrench: Running the API
 
 1.  Apply migrations:
 
@@ -189,6 +191,6 @@ The API uses JWT (JSON Web Tokens) for authentication, provided by the `rest_fra
 
 The API will be accessible at `http://localhost:8000/`.
 
-## License
+## :white_check_mark: License
 
-[Choose a license, e.g., MIT]
+This project is licensed under the MIT License

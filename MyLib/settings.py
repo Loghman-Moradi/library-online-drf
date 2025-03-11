@@ -146,7 +146,6 @@ SIMPLE_JWT = {
 }
 
 
-SANDBOX = True
-MERCHANT = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+
 
 

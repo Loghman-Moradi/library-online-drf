@@ -9,7 +9,7 @@ This project is a RESTful API for an e-library, built using Django REST Framewor
 ## :chart: Table of Contents
 
 *   [Introduction](#introduction)
-*   [Features](#features)
+*   [Features](##Features)
 *   [Endpoints](#endpoints)
 *   [Authentication](#authentication)
 *   [Authorization](#authorization)
@@ -26,7 +26,7 @@ This project is a RESTful API for an e-library, built using Django REST Framewor
 
 The E-Library REST API provides a backend for managing and accessing a digital library. It is designed to be used with a front-end application, allowing users to browse books, manage their profiles, place orders, and more.  The API uses JWT for secure authentication.
 
-## :star: Features
+## Features
 
 *   **Book Management:**
     *   List all books

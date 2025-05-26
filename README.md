@@ -6,10 +6,6 @@
 
 This project is a RESTful API for an e-library, built using Django REST Framework. It provides endpoints for managing books, authors, user profiles, shopping carts, orders, and more.  Authentication is handled using JWT (JSON Web Tokens).
 
-## Introduction
-
-The E-Library REST API provides a backend for managing and accessing a digital library. It is designed to be used with a front-end application, allowing users to browse books, manage their profiles, place orders, and more.  The API uses JWT for secure authentication.
-
 ## :star: Features
 
 *   **Book Management:**

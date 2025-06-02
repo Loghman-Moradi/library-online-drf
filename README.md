@@ -39,25 +39,25 @@ This project is a RESTful API for an e-library, built using Django REST Framewor
 
 ## 💥 Endpoints
 
-| Method   | Endpoint                            | Description                                    | Permissions                               |
-| :------- | :---------------------------------- | :--------------------------------------------- | :---------------------------------------- |
-| `GET`    | `/api/books/`                      | List all books                               | `AllowAny`                                |
-| `GET`    | `/api/book_detail/<int:pk>/`       | Retrieve details of a specific book          | `AllowAny`                                |
-| `POST`   | `/api_account/send-otp/`                   | Send OTP for phone number verification       | `AllowAny`                                |
-| `POST`   | `/api_account/verify-otp/`                  | Verify OTP to authenticate user and receive JWT| `AllowAny`                                |
-| `POST`   | `/api_account/token-refresh/`              | Refresh authentication token                 | `AllowAny` (using refresh token)         |
-| `GET`    | `/api_account/profile/`                    | Retrieve user profile information            | `IsAuthenticated`                         |
-| `PUT`    | `/api_account/profile/`                    | Update user profile information              | `IsAuthenticated`                         |
-| `GET`    | `/api_cart/cart_page/`                  | View cart items                               | `IsAuthenticated`                         |
-| `POST`   | `/api_cart/add_to_cart/<int:book_id>/`   | Add book to the cart                          | `IsAuthenticated`                         |
-| `DELETE` | `/api_cart/delete_cart/<int:pk>/`        | Delete a specific cart item                   | `IsAuthenticated`                         |
-| `DELETE` | `/api_cart/delete_whole_cartitems/`   | Delete all items from the cart                | `IsAuthenticated`                         |
-| `GET`    | `/api_order/view_order/`                 | View order history                             | `IsAuthenticated`                         |
-| `POST`   | `/api_order/create_order/`               | Create a new order                             | `IsAuthenticated`                         |
-| `POST`   | `/api_order/apply_coupon/`               | Apply a coupon to an order                   | `IsAuthenticated`                         |
-| `CRUD`   | `/api/authors/`                    | Create, Read, Update, Delete authors         | `IsAuthenticated`                         |
-| `CRUD`   | `/api/comments/`                   | Create, Read, Update, Delete comments        | `IsAuthenticated`                         |
-| `CRUD`   | `/api/ratings/`                    | Create, Read, Update, Delete ratings         | `IsAuthenticated`                         |
+| Method   | Endpoint                                  | Description                                    | Permissions                               |
+| :------- |:------------------------------------------| :--------------------------------------------- | :---------------------------------------- |
+| `GET`    | `/api/books/`                             | List all books                               | `AllowAny`                                |
+| `GET`    | `/api/book_detail/<int:pk>/`              | Retrieve details of a specific book          | `AllowAny`                                |
+| `POST`   | `/api_account/send-otp/`                  | Send OTP for phone number verification       | `AllowAny`                                |
+| `POST`   | `/api_account/verify-otp/`                | Verify OTP to authenticate user and receive JWT| `AllowAny`                                |
+| `POST`   | `/api_account/token-refresh/`             | Refresh authentication token                 | `AllowAny` (using refresh token)         |
+| `GET`    | `/api_account/profile/`                   | Retrieve user profile information            | `IsAuthenticated`                         |
+| `PUT`    | `/api_account/profile/`                   | Update user profile information              | `IsAuthenticated`                         |
+| `GET`    | `/api_cart/cart_page/`                    | View cart items                               | `IsAuthenticated`                         |
+| `POST`   | `/api_cart/add_to_cart/<int:book_id>/`    | Add book to the cart                          | `IsAuthenticated`                         |
+| `DELETE` | `/api_cart/delete_cart/<int:pk>/`         | Delete a specific cart item                   | `IsAuthenticated`                         |
+| `DELETE` | `/api_cart/clear_cart/`                   | Delete all items from the cart                | `IsAuthenticated`                         |
+| `GET`    | `/api_order/view_order/`                  | View order history                             | `IsAuthenticated`                         |
+| `POST`   | `/api_order/create_order/`                | Create a new order                             | `IsAuthenticated`                         |
+| `POST`   | `/api_order/apply_coupon/`                | Apply a coupon to an order                   | `IsAuthenticated`                         |
+| `CRUD`   | `/api/authors/`                           | Create, Read, Update, Delete authors         | `IsAuthenticated`                         |
+| `CRUD`   | `/api/comments/`                          | Create, Read, Update, Delete comments        | `IsAuthenticated`                         |
+| `CRUD`   | `/api/ratings/`                           | Create, Read, Update, Delete ratings         | `IsAuthenticated`                         |
 
 :exclamation: **Note:**
 

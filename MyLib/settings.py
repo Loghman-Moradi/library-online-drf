@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'Account.apps.AccountConfig',
     'Orders.apps.OrdersConfig',
     'Cart.apps.CartConfig',
-    'Payment.apps.PaymentConfig',
     'rest_framework',
     'rest_framework_simplejwt',
 ]
@@ -141,11 +140,17 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(weeks=3),
-    'REFRESH_TOKEN_LIFETIME': timedelta(weeks=4),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=1),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=5),
 }
 
 
+# {
+#     "message": "User Created Successfully",
+#     "user_phone": "09184517699",
+#     "access_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ4OTQ3NTkxLCJpYXQiOjE3NDg4NjExOTEsImp0aSI6ImM0MzE0ODkxNjUzNzQ4MDk5ZGIxZTk3Nzg3N2IwNjIyIiwidXNlcl9pZCI6MTF9.iDw59h_WrxUspudO2WuMuQyhl85ggaOaTcKgaTF0KKs",
+#     "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0OTI5MzE5MSwiaWF0IjoxNzQ4ODYxMTkxLCJqdGkiOiJjNGExMjEwZmExM2M0YmFiOWFhZDVjN2UyMmM0ZmJjMSIsInVzZXJfaWQiOjExfQ.0evh9ZzoBcAIQ_gol4eISsjiwTbGFfmpB3kTt9cvJZI"
+# }
 
 
 

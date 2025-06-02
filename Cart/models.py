@@ -4,12 +4,19 @@ from Bookish.models import Book
 
 
 class Cart(models.Model):
-    id = models.BigAutoField(primary_key=True, auto_created=True,  verbose_name="ID")
     user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name="cart", null=True, blank=True)
     session_id = models.CharField(max_length=60, unique=True, null=True, blank=True)
 
     def __str__(self):
-        return str(self.user) if self.user else self.session_id
+        return str(self.user) if self.user else str(self.session_id)
+
+    class Meta:
+        constraints = [
+            models.CheckConstraint(
+                check=models.Q(user__isnull=False) | models.Q(session_id__isnull=False),
+                name='user_or_session_id_required'
+            )
+        ]
 
     @property
     def total_price(self):
@@ -30,9 +37,10 @@ class CartItems(models.Model):
     def __str__(self):
         return f"{self.book.title} - {self.quantity}"
 
+
     @property
     def price(self):
-        return self.book.new_price
+        return self.book.new_price * self.quantity
 
 
 

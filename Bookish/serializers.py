@@ -7,7 +7,7 @@ from .models import *
 class GenreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Genre
-        fields = ['name']
+        fields = ['id', 'name']
 
 
 class CommentSerializer(serializers.ModelSerializer):
@@ -23,20 +23,19 @@ class RatingSerializer(serializers.ModelSerializer):
     user = serializers.StringRelatedField(read_only=True)
     book = serializers.PrimaryKeyRelatedField(queryset=Book.objects.all())
 
-    def validate(self, attrs):
-        user = self.context['request'].user
-        book = attrs['book']
-
-        if Rating.objects.filter(user=user, book=book).exists():
-            raise ValidationError("You have already rated this book.")
-        return attrs
-
     class Meta:
         model = Rating
         fields = ['user', 'book', 'rate']
 
 
+class AuthorListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['id', 'name', 'bio']
+
+
 class BookListSerializer(serializers.ModelSerializer):
+    authors = AuthorListSerializer(many=True, read_only=True)
     class Meta:
         model = Book
         fields = ['id', 'title', 'authors', 'new_price', 'average_rating']
@@ -56,6 +55,8 @@ class BookDetailSerializer(serializers.ModelSerializer):
     rating = RatingSerializer(many=True, read_only=True)
     audio_file = serializers.SerializerMethodField()
     pdf_file = serializers.SerializerMethodField()
+    authors = AuthorListSerializer(many=True, read_only=True)
+    genre = GenreSerializer()
 
     class Meta:
         model = Book
@@ -95,10 +96,6 @@ class BookDetailSerializer(serializers.ModelSerializer):
         return None
 
 
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = ['id', 'name', 'bio']
 
 
 

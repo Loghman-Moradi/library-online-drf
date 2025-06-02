@@ -1,5 +1,4 @@
 from django.db import models
-from django.template.defaultfilters import default
 from django.utils.text import slugify
 from Account.models import LibraryUsers
 from django.core.validators import MinValueValidator, MaxValueValidator, FileExtensionValidator
@@ -7,7 +6,7 @@ from django.db.models import Avg
 
 
 class Author(models.Model):
-    name = models.CharField(max_length=20)
+    name = models.CharField(max_length=100)
     bio = models.TextField()
     slug = models.SlugField(unique=True, blank=True)
 
@@ -48,12 +47,12 @@ class Genre(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
-    authors = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
-    genre = models.ForeignKey(Genre, on_delete=models.CASCADE, related_name="books")
+    authors = models.ManyToManyField(Author, related_name="books")
+    genre = models.ForeignKey(Genre, on_delete=models.SET_NULL, null=True, blank=True, related_name="books")
     price = models.PositiveIntegerField(default=0)
     offers = models.PositiveIntegerField(default=0)
     inventory = models.PositiveIntegerField(default=0)
-    publication_date = models.DateField(auto_now_add=True)
+    publication_date = models.DateField(blank=True, null=True)
     cover_image = models.ImageField(upload_to="book_cover")
     pdf_file = models.FileField(
         upload_to='books_pdf/',
@@ -74,7 +73,7 @@ class Book(models.Model):
 
     @property
     def new_price(self):
-        return self.price - self.offers
+        return max(0, self.price - self.offers)
 
     def update_average_rating(self):
         average = self.rating.aggregate(Avg('rate'))['rate__avg'] or 0.0
@@ -93,9 +92,6 @@ class BookPurchase(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     purchase_date = models.DateTimeField(auto_now_add=True)
 
-    def purchased_books(self):
-        return self.user.purchased_books.all()
-
     def __str__(self):
         return f"{self.user.phone} - {self.book.title}"
 
@@ -108,7 +104,7 @@ class Comment(models.Model):
     message = models.TextField()
 
     def __str__(self):
-        return f"{self.user}"
+        return f"{self.user} - {self.message} - {self.book}"
 
     class Meta:
         ordering = ['-created_at']
@@ -127,11 +123,20 @@ class Rating(models.Model):
     )
 
     user = models.ForeignKey(LibraryUsers, on_delete=models.CASCADE, related_name="rating")
-    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="rating", blank=True, null=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name="rating")
     rate = models.PositiveIntegerField(
-        choices=RATE_CHOICE, validators=[MinValueValidator(1), MaxValueValidator(5)],blank=True, null=True)
+        choices=RATE_CHOICE, validators=[MinValueValidator(1), MaxValueValidator(5)])
 
     def __str__(self):
         return f"{self.user} - {self.book} - {self.rate}"
 
+    class Meta:
+
+        unique_together = ('user', 'book')
+        ordering = ['-id']
+        indexes = [
+            models.Index(fields=['user']),
+            models.Index(fields=['book']),
+            models.Index(fields=['rate']),
+        ]
 

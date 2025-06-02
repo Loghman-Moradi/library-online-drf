@@ -11,19 +11,36 @@ class LibraryUserAdmin(UserAdmin):
 
     fieldsets = (
         (None, {'fields': ('phone', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser')}),
-        ('Important dates', {'fields': ('date_joined',)}),
+        ('Important dates', {'fields': ('date_joined', 'last_login')}),
     )
     add_fieldsets = (
         (None, {
-            'fields': ('phone', 'password1', 'password2', 'is_active', 'is_staff', 'is_superuser')}
+            'fields': ('phone', 'password')},
          ),
     )
 
-    readonly_fields = ('date_joined',)
+    readonly_fields = ('date_joined', 'last_login')
+    search_fields = ('is_active', 'is_staff', 'is_superuser')
 
 
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
-    list_display = ['user', 'bio']
+    list_display = ['user','first_name', 'last_name', 'bio']
+    search_fields = ['user__phone', 'first_name', 'last_name', 'bio']
+    list_filter = ['created_at', 'updated_at']
+    raw_id_fields = ['user']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
